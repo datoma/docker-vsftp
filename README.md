@@ -1,2 +1,2 @@
-# docker-vsftp
-vsftp as docker
+# docker-vsftpd
+vsftpd as docker
