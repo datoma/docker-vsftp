@@ -1,17 +1,24 @@
 #!/bin/sh
 
 #CREATE THE USER AND THE HOME FOLDER
-addgroup -g $FTP_UID -S $FTP_USER
-if [[ "$FTP_HOME" != "default" ]]; then
-  adduser -u $FTP_UID -D -G $FTP_USER -h $FTP_HOME -s /bin/false  $FTP_USER
-  chown $FTP_USER:$FTP_USER $FTP_HOME -R
-else
-  adduser -u $FTP_UID -D -G $FTP_USER -h /home/$FTP_USER -s /bin/false  $FTP_USER
-  chown $FTP_USER:$FTP_USER /home/$FTP_USER/ -R
-fi
+#addgroup -g $FTP_UID -S $FTP_USER
+#if [[ "$FTP_HOME" != "default" ]]; then
+#  adduser -u $FTP_UID -D -G $FTP_USER -h $FTP_HOME -s /bin/false  $FTP_USER
+#  chown $FTP_USER:$FTP_USER $FTP_HOME -R
+#else
+#  adduser -u $FTP_UID -D -G $FTP_USER -h /home/$FTP_USER -s /bin/false  $FTP_USER
+#  chown $FTP_USER:$FTP_USER /home/$FTP_USER/ -R
+#fi
+
+mkdir /home/$FTP_USER
+addgroup -S $FTP_USER
+adduser -S $FTP_USER -G $FTP_USER -h /home/$FTP_USER -s /bin/sh
+#echo $ftp_login:$ftp_pass | chpasswd
+echo "$FTP_USER:$FTP_PASS" | /usr/sbin/chpasswd
+chown -R $FTP_USER:$FTP_USER /home/$FTP_USER
 
 #UPDATE PASSWORD
-echo "$FTP_USER:$FTP_PASS" | /usr/sbin/chpasswd
+#echo "$FTP_USER:$FTP_PASS" | /usr/sbin/chpasswd
 
 cp /etc/vsftpd/vsftpd.conf_or /etc/vsftpd/vsftpd.conf
 
