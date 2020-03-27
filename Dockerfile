@@ -5,7 +5,6 @@ COPY entrypoint.sh /bin/entrypoint.sh
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
 
 EXPOSE 21 21000-21010
-VOLUME /ftp/ftp
 
 ENTRYPOINT ["/bin/entrypoint.sh"]
 
